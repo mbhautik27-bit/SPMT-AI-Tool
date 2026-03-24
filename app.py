@@ -4,10 +4,6 @@ import pandas as pd
 if "page" not in st.session_state:
     st.session_state.page = 1
 
-col_logo, col_space = st.columns([1, 6])
-with col_logo:
-    st.image("nitw_logo.png", width=80)
-
 st.set_page_config(page_title="SPMT-AI Tool", layout="wide")
 
 # ===== SAFE DIVISION =====
@@ -88,38 +84,77 @@ def get_level(sev, ext):
 
 
 if st.session_state.page == 1:
+    # ===== HEADER (LOGO + TITLE IN SAME ROW) =====
+    col1, col2 = st.columns([1,5])
 
-    st.markdown("### Ph.D. Presentation to DSC")
+    with col1:
+        st.image("nitw_logo.png", width=120)
 
+    with col2:
+        st.markdown("""
+        <h1 style='color:red; text-align:center; margin-top:30px;'>
+        NITW Sustainability Pavement Maintenance Treatment Assessment Index Tool (SPMT-AI)
+        </h1>
+        """, unsafe_allow_html=True)
+
+    # ===== MAIN CONTENT =====
     st.markdown("""
-    ## Development of Quadruple Bottomline based Sustainability Rating Framework for the Maintenance of Low-Volume Rural Roads
-    """)
+    <div style='text-align:center;'>
 
-    st.markdown("### Presented by")
-    st.markdown("### **Mr. M. Raji Reddy**")
-    st.markdown("### Roll No.: 720027")
+    <h3>Welcome to the NITW Sustainability Pavement Maintenance Treatment Assessment Index (SPMT-AI) Tool for LVRR Maintenance</h3>
 
-    st.markdown("### Under the Guidance of")
-    st.markdown("### Prof. S. Shankar")
-    st.markdown("### Associate Professor")
+    <p>
+    This tool is part of the PhD research titled:
+    <br>
+    <b>"Development of Quadruple Bottomline based Sustainability Rating Framework for the Maintenance of Low-Volume Rural Roads"</b>
+    </p>
 
-    st.markdown("""
-    ### Transportation Engineering Program  
-    ### Department of Civil Engineering  
-    ### National Institute of Technology Warangal  
-    ### March 2026
-    """)
+    <h4>Purpose:</h4>
+
+    <p>
+    To evaluate the sustainability performance of maintenance interventions on low-volume rural roads across environmental, economic, social, material, considering the pavement distress.
+    <br>
+    This module focuses on quadruple bottom line -QBL (i.e., Environment, Economy, Social and Materials for sustainable assessment and rating the maintenance alternatives treatments of low volume rural road across India (LVVR’s, India).
+    </p>
+
+    <h4>Instructions:</h4>
+
+    <p>
+    <b>Consent Statement:</b> By clicking Start, I confirm that I have read and understood the purpose of this tool, and the engineering values entered are collected with due care and voluntarily entered.
+    </p>
+
+    <p>
+    1. Please answer all questions and enter your values for accurate results.<br>
+    2. The values shall be entered within specified parameters.<br>
+    3. The values will be used to assess sustainability and PCI and suggest maintenance alternatives.
+    </p>
+
+    <p><b>Thank you</b></p>
+
+    <p>
+    Note: This Tool is a patented product. All rights are reserved.
+    </p>
+
+    <p>
+    RAJI REDDY MYAKALA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DR. S. SHANKAR
+    </p>
+
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("**Page 1 / 2**")
 
     col1, col2, col3 = st.columns([4,1,1])
 
     with col3:
-        if st.button("Next →"):
+        if st.button("Start →"):
             st.session_state.page = 2
 
 
 
 elif st.session_state.page == 2:
+    col_logo, col_space = st.columns([1, 6])
+    with col_logo:
+        st.image("nitw_logo.png", width=80)
     # ===== TITLE =====
     st.title("🛣️ Pavement Assessment Dashboard")
 
