@@ -12,12 +12,13 @@ def safe_div(num, den):
 
 treatment_specs = {
     "Fog Seal": {
-        "Application Rate (kg/m²)": "0.23 – 0.45",
-        "Aggregate Size (mm)": "—",
-        "Layer Thickness (mm)": "Very thin (film)",
-        "Rut Filling Capacity (mm)": "—",
+        "Material": "Diluted Asphalt Emulsion (1:1)",
+        "Application Rate (L/m²)": "0.5 – 1.0",
+        "Temperature (°C)": "≈ 50",
+        "Application Type": "Very thin film",
         "Curing Time (hours)": "2 – 4",
-        "Service Life (years)": "1 – 2"
+        "Service Life (years)": "1 – 2",
+        "Reference": "IRC:82-2015"
     },
     "Chip Seal": {
         "Application Rate (kg/m²)": "—",
@@ -92,7 +93,7 @@ if st.session_state.page == 1:
 
     with col2:
         st.markdown("""
-        <h1 style='color:red; text-align:center; margin-top:30px;'>
+        <h1 style='color:red; text-align:center; margin-top:0px;'>
         NITW Sustainability Pavement Maintenance Treatment Assessment Index Tool (SPMT-AI)
         </h1>
         """, unsafe_allow_html=True)
@@ -159,7 +160,7 @@ elif st.session_state.page == 2:
     st.title("🛣️ Pavement Assessment Dashboard")
 
     # ===== BASIC INFO =====
-    st.header("📍 Basic Information")
+    st.header("📍 Pavement Inventory Data")
 
     col1, col2, col3 = st.columns(3)
 
@@ -184,6 +185,12 @@ elif st.session_state.page == 2:
         state = st.selectbox("State", states)
 
     with col3:
+        district = st.text_input(
+            "District",
+            disabled=(state == "--Select State--")
+    )
+
+    with col1:
         road_name = st.text_input("Road Name")
 
 
@@ -197,12 +204,12 @@ elif st.session_state.page == 2:
         RE = st.number_input("Ravelling %", min_value=0.0)
 
     with col2:
-        PN = st.number_input("Potholes", min_value=0.0)
+        PN = st.number_input("Potholes (number/km)", min_value=0, step=1, format="%d")
         PE = st.number_input("Patching %", min_value=0.0)
 
     with col3:
-        RD = st.number_input("Rut Depth", min_value=0.0)
-        IRI = st.number_input("IRI", min_value=0.0)
+        RD = st.number_input("Rut Depth (mm)", min_value=0.0)
+        IRI = st.number_input("IRI (m/km)", min_value=0.0)
 
     # ===== CALCULATE PCI =====
     if st.button("Calculate PCI"):
