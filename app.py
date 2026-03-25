@@ -21,12 +21,15 @@ treatment_specs = {
         "Reference": "IRC:82-2015"
     },
     "Chip Seal": {
-        "Application Rate (kg/m²)": "—",
-        "Aggregate Size (mm)": "10 – 13",
-        "Layer Thickness (mm)": "Single layer",
-        "Rut Filling Capacity (mm)": "—",
-        "Curing Time (hours)": "Few hours (varies)",
-        "Service Life (years)": "3 – 5"
+        "Material": "Cationic Bitumen Emulsion (Rapid Setting, ≥65% binder)",
+        "Purpose": "Surface sealing, fatigue crack treatment, wearing course protection",
+        "Aggregate Size (mm)": "10 – 12",
+        "Layer Thickness (mm)": "10 – 20",
+        "Application Type": "Single or Double Coat",
+        "Construction Temperature (°C)": "≥16 (bitumen), ≥10 (emulsion)",
+        "Application Process": "First coat followed by second coat after few weeks",
+        "Service Function": "Improves binder efficiency and seal integrity",
+        "Reference": "IRC:SP:72-2015"
     },
     "Slurry Seal": {
         "Application Rate (kg/m²)": "—",
@@ -157,7 +160,7 @@ elif st.session_state.page == 2:
     with col_logo:
         st.image("nitw_logo.png", width=80)
     # ===== TITLE =====
-    st.title("🛣️ Pavement Assessment Dashboard")
+    st.title("🛣️ Sustainability Pavement Maintenance Tool Assessment Index")
 
     # ===== BASIC INFO =====
     st.header("📍 Pavement Inventory Data")
@@ -277,12 +280,12 @@ elif st.session_state.page == 2:
 
         # ===== CRACKS =====
         with col1:
-            cracks = st.checkbox("Cracks")
+            cracks = st.checkbox("Cracks ")
 
             if cracks:
-                c_val = st.number_input("Severity", key="c1")
-                c_unit = st.selectbox("Unit", ["mm", "cm"], key="c1u")
-                c_ext = st.number_input("Extent (%)", key="c2")
+                c_val = st.number_input("Severity (Low(1-3mm), Moderate(3-6mm), High(>6mm))", key="c1")
+                c_unit = st.selectbox("Severity Unit", ["mm", "cm"], key="c1u")
+                c_ext = st.number_input("Extent% (Low(1-9%), Moderate(10-24%), High(>25%))", key="c2")
 
                 if c_unit == "cm":
                     c_val *= 10
@@ -301,9 +304,9 @@ elif st.session_state.page == 2:
             alligator = st.checkbox("Alligator Cracking")
 
             if alligator:
-                a_val = st.number_input("Severity", key="a1")
-                a_unit = st.selectbox("Unit", ["mm", "cm"], key="a1u")
-                a_ext = st.number_input("Extent (%)", key="a2")
+                a_val = st.number_input("Severity (Low(1-3mm), Moderate(3-6mm), High(>6mm))", key="a1")
+                a_unit = st.selectbox("Severity Unit", ["mm", "cm"], key="a1u")
+                a_ext = st.number_input("Extent% (Low(1-9%), Moderate(10-24%), High(>25%))", key="a2")
 
                 if a_unit == "cm":
                     a_val *= 10
@@ -319,7 +322,7 @@ elif st.session_state.page == 2:
 
         # ===== STRIPING =====
         with col2:
-            strip_val = st.number_input("Striping Value")
+            strip_val = st.number_input("Striping Value (< 10% → Good, 10–25% → Moderate, >25% → Severe)")
             strip_unit = st.selectbox("Unit", ["%", "fraction"])
 
             if strip_unit == "fraction":
@@ -333,7 +336,7 @@ elif st.session_state.page == 2:
 
         # ===== RUTTING =====
         with col2:
-            rut_val = st.number_input("Rutting Depth")
+            rut_val = st.number_input("Rutting Depth (< 10 mm → Acceptable, 10–20 mm → Moderate, >20 mm → Severe)")
             rut_unit = st.selectbox("Unit", ["mm", "cm"])
 
             if rut_unit == "cm":
@@ -394,7 +397,8 @@ elif st.session_state.page == 2:
             st.bar_chart(df.set_index("Treatment"))
 
             st.write(f"📍 {road_name}, {state}, {country}")
-            st.success(f"Recommended Treatment: {best} (Score: {score:.3f})")
+            st.success(f"Pavement Maintenance Treatment Score = Sustainability Score + Distress Score\n"
+                f"Recommended Treatment: {best} (Score: {score:.3f})")
             st.subheader("📊 Recommended Treatment Specifications")
 
             spec = treatment_specs[best]
