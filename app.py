@@ -397,7 +397,7 @@ elif st.session_state.page == 2:
             st.bar_chart(df.set_index("Treatment"))
 
             st.write(f"📍 {road_name}, {state}, {country}")
-            st.success(f"Pavement Maintenance Treatment Score = Sustainability Score + Distress Score\n"
+            st.success(f"Pavement Maintenance Treatment Score = Sustainability Score + Distress Score\n\n"
                 f"Recommended Treatment: {best} (Score: {score:.3f})")
             st.subheader("📊 Recommended Treatment Specifications")
 
