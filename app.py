@@ -160,7 +160,7 @@ elif st.session_state.page == 2:
     with col_logo:
         st.image("nitw_logo.png", width=80)
     # ===== TITLE =====
-    st.title("🛣️ Sustainability Pavement Maintenance Tool Assessment Index")
+    st.title("🛣️ Sustainability Pavement Maintenance Treatment Assessment Index Tool")
 
     # ===== BASIC INFO =====
     st.header("📍 Pavement Inventory Data")
@@ -336,14 +336,14 @@ elif st.session_state.page == 2:
 
         # ===== RUTTING =====
         with col2:
-            rut_val = st.number_input("Rutting Depth (< 10 mm → Acceptable, 10–20 mm → Moderate, >20 mm → Severe)")
+            rut_val = st.number_input("Rutting Depth (<50 mm or >50 mm)")
             rut_unit = st.selectbox("Unit", ["mm", "cm"])
 
             if rut_unit == "cm":
                 rut_val *= 10
 
             if rut_val > 0:
-                if rut_val < 20:
+                if rut_val < 50:
                     micro += 1
                 else:
                     thmo += 1
